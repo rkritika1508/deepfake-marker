@@ -112,9 +112,14 @@ plt.show()
 true_labels = []
 predictions = []
 
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import numpy as np
+true_labels = []
+predictions = []
+
 for images, labels in test_data:
-    true_labels.extend(np.argmax(labels.numpy(), axis=1))
-    batch_predictions = np.argmax(model.predict(images), axis=1)
+    true_labels.extend(labels.numpy().astype(int)) 
+    batch_predictions = (model.predict(images) > 0.5).astype(int).flatten()
     predictions.extend(batch_predictions)
 
 true_labels = np.array(true_labels)
