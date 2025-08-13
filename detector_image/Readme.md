@@ -36,13 +36,13 @@
 ---
 
 ## 5. Results & Metrics
-| Metric        | Train Value | Validation Value | Test Value |
-|---------------|-------------|------------------|------------|
-| Accuracy      |0.986        |0.949             |0.869       |
-| Precision     |0.983        |0.924             |0.883       |
-| Recall        |0.99         |0.979             |0.848       |
-| AUC           |0.999        |0.989             |0.940       |
-| F1-score      |0.986        |0.950             |0.866       |
+| Metric        | Train Value | Validation Value | Test Value (Original dataset) | Test value (Huggingface dataset) |
+|---------------|-------------|------------------|-------------------------------|----------------------------------|
+| Accuracy      |0.986        |0.949             |0.869                          |0.590                             |
+| Precision     |0.983        |0.924             |0.883                          |0.630                             |
+| Recall        |0.99         |0.979             |0.848                          |0.795                             |
+| AUC           |0.999        |0.989             |0.940                          |0.574                             |
+| F1-score      |0.986        |0.950             |0.866                          |0.703                             |
 ---
 ## 6. Some graphs based on metrics
 - **Loss curve**
@@ -57,26 +57,26 @@
 - **Recall curve**
 <img width="639" height="471" alt="Screenshot 2025-08-12 at 6 41 46 AM" src="https://github.com/user-attachments/assets/e6c37c8e-c9b9-4696-bde9-de1b305069ef" />
 
-- **Confusion matrix**
+- **Confusion matrix (Original dataset)**
 <img width="578" height="441" alt="Screenshot 2025-08-12 at 6 42 06 AM" src="https://github.com/user-attachments/assets/f7c6c013-5f38-4d2b-a440-72520d9a0fb4" />
+
+- **Confusion matrix (Huggingface dataset)**
+<img width="578" height="404" alt="image" src="https://github.com/user-attachments/assets/6a4cf51e-cb66-4719-b3c3-4d0d9a896d55" />
 
 ---
 
 ## 7. Observations
-- Validation and test dataset performance is lower than training metrics, suggesting some overfitting. 
-- Recall > Precision: Across all sets, recall is consistently higher than precision, meaning the model is slightly more inclined to label an image as "fake" when in doubt. This reduces false negatives but may increase false positives.
+- High performance on original dataset indicates that model learned meaningful features from training data.
+- Significant performance drop on unseen dataset. Many fake images were labeled as real. 
+- The large drop is likely due to differences between the training dataset and the new dataset (e.g., image resolution, compression artifacts, lighting, face poses, or deepfake generation method).
+- The large gap between validation/test and new dataset results suggests that while regularization (dropout) helped, the model still memorized patterns that do not transfer well.
 
 ---
 
 ## 8. Future Improvements
+- Train on multiple deepfake datasets from different sources and manipulation methods to capture a broader range of features.
 - Use regularization methods such as dropout, weight decay, or data augmentation to reduce overfitting and improve generalization to unseen data.
 - Systematically explore learning rates, batch sizes, and optimizer parameters to find settings that improve validation and test performance without overfitting.
-- Experiment with architectures of varying depth and capacity to determine the optimal model.
+- Experiment with architectures of varying depth and capacity to determine the optimal model. Possibly explore pre-trained CNN models like ResNet, EfficientNet, etc.
 - Use k-fold cross-validation instead of a single validation split to obtain more robust estimates of performance and reduce the risk of overfitting to a specific validation set.
 - Qualitative analysis of misclassified examples.
----
-
-
-
-
-
