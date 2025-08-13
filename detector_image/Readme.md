@@ -80,3 +80,21 @@
 - Experiment with architectures of varying depth and capacity to determine the optimal model. Possibly explore pre-trained CNN models like ResNet, EfficientNet, etc.
 - Use k-fold cross-validation instead of a single validation split to obtain more robust estimates of performance and reduce the risk of overfitting to a specific validation set.
 - Qualitative analysis of misclassified examples.
+
+
+---
+
+## 9. Key Learnings
+- Learned how to handle TensorFlow datasets vs. standalone image inputs (_MapDataset vs. manual loading with tf.keras.utils.load_img).
+- Learnt the importance of consistent preprocessing — target size and normalization must match the training setup.
+- Understood that class imbalance and domain shift can cause the model to favor one class heavily (in this case, “fake” images).
+- Realized that beyond accuracy, recall, precision, and AUC are critical to fully assess model behavior, especially when false positives/negatives have different costs.
+
+---
+
+## 10. Resources Referred
+- https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image_dataset_from_directory
+- https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ConfusionMatrixDisplay.html
+- https://proclusacademy.com/blog/practical/confusion-matrix-accuracy-sklearn-seaborn/
+- https://www.tensorflow.org/tutorials/images/cnn
+- https://www.kaggle.com/code/prashant111/comprehensive-guide-to-cnn-with-keras
